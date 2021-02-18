@@ -20,7 +20,7 @@ TGraph = Client(
 @TGraph.on_message(filters.command("start"))
 async def start(client, message):
     await message.reply_text(
-        f"Hello {message.from_user.first_name},\nIm telegram to telegra.ph image uploader bot by @W4RR10R",
+        f"Hello {message.from_user.first_name},\nIm a simple telegram bot to upload images to Telegraph. Made with ❤ by @NexaBotsUpdates",
         True,
     )
 
@@ -33,13 +33,13 @@ async def getimage(client, message):
     img_path = os.path.join(tmp, str(uuid.uuid4()) + ".jpg")
     dwn = await message.reply_text("Downloading...", True)
     img_path = await client.download_media(message=message, file_name=img_path)
-    await dwn.edit_text("Uploading...")
+    await dwn.edit_text("Uploading Your File Please wait...")
     try:
         response = upload_file(img_path)
     except Exception as error:
         await dwn.edit_text(f"Oops something went wrong\n{error}")
         return
-    await dwn.edit_text(f"https://telegra.ph{response[0]}")
+    await dwn.edit_text(f"Made with ❤ by @NexaBotsUpdates . Thanks for using Me!. Here is Your Telegraph Link - https://telegra.ph{response[0]}")
     shutil.rmtree(tmp, ignore_errors=True)
 
 
